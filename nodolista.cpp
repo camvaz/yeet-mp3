@@ -14,3 +14,8 @@ QString NodoLista::regresaNombre()
 {
     return song.getNombre();
 }
+
+Pista NodoLista::regresaPista()
+{
+    return this->song;
+}

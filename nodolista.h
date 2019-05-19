@@ -10,6 +10,7 @@ public:
     NodoLista();
     NodoLista(const Pista&);
     QString regresaNombre();
+    Pista regresaPista();
     friend class Lista;
 };
 

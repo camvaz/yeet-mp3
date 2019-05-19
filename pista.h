@@ -5,16 +5,20 @@
 class Pista
 {
     QString nombre;
-    qint64 duracion;
+    QString duracion;
     QString autor;
     QString imagen;
     QString ruta;
 public:
     Pista();
-    Pista(QString, qint64, QString, QString, QString);
+    Pista(QString, QString, QString, QString, QString);
     Pista(const Pista&);
-    void setObject(QString, qint64, QString, QString, QString);
+    void setObject(QString, QString, QString, QString, QString);
     QString getNombre();
+    QString getDuracion();
+    QString getAutor();
+    QString getImagen();
+    QString getRuta();
 };
 
 #endif // PISTA_H

@@ -1,10 +1,13 @@
 #ifndef LISTA_H
 #define LISTA_H
 #include <nodolista.h>
+#include <qdebug.h>
+#include <qmediaplayer.h>
 
 class Lista
 {
     NodoLista *head;
+    NodoLista *iteradorPlaylist;
 public:
     Lista();
     NodoLista *getHead();
@@ -12,7 +15,12 @@ public:
     void InsertaFinal(Pista);
     bool eliminaPrimero();
     bool eliminaUltimo();
+    void setIterator(NodoLista*);
+    void reproducirOrden(QMediaPlayer*);
+    NodoLista *iteratorRight();
+    NodoLista *iteratorLeft();
     NodoLista *busqueda(QString,NodoLista*);
+    NodoLista *returnIterador();
 };
 
 #endif // LISTA_H

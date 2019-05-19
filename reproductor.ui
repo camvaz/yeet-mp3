@@ -6,16 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1155</width>
-    <height>621</height>
+    <width>1779</width>
+    <height>665</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Reproductor</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QListWidget{
-	Background: #c9c5c9;
+	Background: #c7c7c7;
+}
+
+QListWidget::item:selected
+{
+    background: #858585;
 }
 
 QGroupBox {
@@ -134,7 +144,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
       <x>20</x>
       <y>10</y>
       <width>401</width>
-      <height>551</height>
+      <height>581</height>
      </rect>
     </property>
     <property name="font">
@@ -149,35 +159,17 @@ QPushButton#pushButtonCancel:hover:!pressed{
     <property name="title">
      <string>Reproductor</string>
     </property>
-    <widget class="QLabel" name="imagen">
+    <widget class="QLabel" name="labelImagen">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>40</y>
-       <width>261</width>
-       <height>261</height>
+       <x>80</x>
+       <y>50</y>
+       <width>251</width>
+       <height>251</height>
       </rect>
      </property>
      <property name="text">
       <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_8">
-     <property name="geometry">
-      <rect>
-       <x>180</x>
-       <y>530</y>
-       <width>41</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>13</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>🔁</string>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget">
@@ -186,7 +178,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
        <x>50</x>
        <y>330</y>
        <width>301</width>
-       <height>200</height>
+       <height>233</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -301,7 +293,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="botonAtras">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -375,7 +367,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="botonAdelante">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -398,13 +390,6 @@ QPushButton#pushButtonCancel:hover:!pressed{
        </layout>
       </item>
       <item>
-       <widget class="QSlider" name="sliderVolumen">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
        <spacer name="verticalSpacer_5">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -417,7 +402,38 @@ QPushButton#pushButtonCancel:hover:!pressed{
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QSlider" name="sliderVolumen">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
      </layout>
+    </widget>
+    <widget class="QPushButton" name="botonEnorden">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>450</y>
+       <width>21</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>40</horstretch>
+       <verstretch>40</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>13</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>🔁</string>
+     </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
@@ -426,7 +442,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
       <x>450</x>
       <y>10</y>
       <width>651</width>
-      <height>551</height>
+      <height>581</height>
      </rect>
     </property>
     <property name="font">
@@ -441,7 +457,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
     <property name="title">
      <string>Lista de Reproduccion</string>
     </property>
-    <widget class="QListWidget" name="listWidget">
+    <widget class="QListWidget" name="listaReproduccion">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -449,6 +465,14 @@ QPushButton#pushButtonCancel:hover:!pressed{
        <width>611</width>
        <height>321</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Loma</family>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
     </widget>
     <widget class="QGroupBox" name="groupBoxInsert">
@@ -499,12 +523,12 @@ QPushButton#pushButtonCancel:hover:!pressed{
         <x>20</x>
         <y>50</y>
         <width>91</width>
-        <height>71</height>
+        <height>88</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="botonInsInicio">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -541,7 +565,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_5">
+        <widget class="QPushButton" name="botonInsFin">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -586,12 +610,12 @@ QPushButton#pushButtonCancel:hover:!pressed{
         <x>10</x>
         <y>50</y>
         <width>91</width>
-        <height>71</height>
+        <height>88</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QPushButton" name="pushButton_6">
+        <widget class="QPushButton" name="botonDelInicio">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -628,7 +652,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_7">
+        <widget class="QPushButton" name="BotonDelFin">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -694,12 +718,12 @@ QPushButton#pushButtonCancel:hover:!pressed{
         <x>10</x>
         <y>90</y>
         <width>201</width>
-        <height>31</height>
+        <height>34</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QPushButton" name="pushButton_10">
+        <widget class="QPushButton" name="botonReproducir">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -736,7 +760,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_9">
+        <widget class="QPushButton" name="botonBuscar">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -758,7 +782,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
        </item>
       </layout>
      </widget>
-     <widget class="QLineEdit" name="lineEdit">
+     <widget class="QLineEdit" name="busquedaNombre">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -778,90 +802,48 @@ QPushButton#pushButtonCancel:hover:!pressed{
       </property>
      </widget>
     </widget>
+    <widget class="QPushButton" name="botonReproducir_2">
+     <property name="geometry">
+      <rect>
+       <x>550</x>
+       <y>550</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <family>Loma</family>
+       <pointsize>11</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #B00E23;</string>
+     </property>
+     <property name="text">
+      <string>Salir</string>
+     </property>
+    </widget>
     <widget class="QGroupBox" name="groupBoxAdd">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>20</x>
        <y>370</y>
-       <width>621</width>
-       <height>181</height>
+       <width>611</width>
+       <height>171</height>
       </rect>
      </property>
      <property name="title">
       <string>Agregar Pista</string>
      </property>
-     <widget class="QWidget" name="layoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>351</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QLabel" name="label_3">
-           <property name="text">
-            <string>Nombre:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="addNombre"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="text">
-            <string>Autor:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>55</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="addArtista"/>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="layoutWidget_3">
       <property name="geometry">
        <rect>
@@ -963,9 +945,9 @@ QPushButton#pushButtonCancel:hover:!pressed{
      <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>130</y>
-        <width>201</width>
+        <x>390</x>
+        <y>120</y>
+        <width>211</width>
         <height>31</height>
        </rect>
       </property>
@@ -1014,6 +996,112 @@ QPushButton#pushButtonCancel:hover:!pressed{
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>41</y>
+        <width>351</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Nombre:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="addNombre"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>Autor:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>55</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="addArtista"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Duracion:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_9">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>34</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="addDuracion">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -1022,7 +1110,7 @@ QPushButton#pushButtonCancel:hover:!pressed{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1155</width>
+     <width>1779</width>
      <height>19</height>
     </rect>
    </property>

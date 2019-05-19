@@ -3,6 +3,7 @@
 Lista::Lista()
 {
     head = nullptr;
+    iteradorPlaylist = head;
 }
 
 NodoLista *Lista::getHead()
@@ -21,17 +22,29 @@ void Lista::InsertaInicio(Pista song)
 void Lista::InsertaFinal(Pista song)
 {
     NodoLista *p, *cola;
+    qDebug() <<"yeet1";
     p = new NodoLista(song);
+    p->next = nullptr;
+    qDebug() <<"yeet2";
     if (head)
     {
-       cola = p;
-       while (cola->next)
+        qDebug() <<"yeet3";
+       cola = head;
+       qDebug() <<"yeet4";
+       while (cola->next){
+           qDebug() <<"yeetn1";
            cola = cola->next;
-
+           qDebug() <<"yeetn2";
+        }
+       qDebug() <<"yeet5";
        cola->next = p;
+       qDebug() <<"yeet6";
     }
-    else
+    else{
+        qDebug() <<"yeet7";
         head = p;
+        qDebug() <<"yeet8";
+    }
 }
 
 bool Lista::eliminaPrimero()
@@ -80,6 +93,64 @@ bool Lista::eliminaUltimo()
     return Resp;
 }
 
+void Lista::setIterator(NodoLista *aux)
+{
+    iteradorPlaylist = aux;
+    qDebug() << aux->regresaNombre();
+}
+
+void Lista::reproducirOrden(QMediaPlayer *player)
+{
+    if(head){
+
+        NodoLista *aux = head;
+        player->setMedia(QUrl::fromLocalFile(aux->regresaPista().getRuta()));
+        player->play();
+        while(aux->next && player->state() == QMediaPlayer::StoppedState){
+            aux = aux->next;
+            player->setMedia(QUrl::fromLocalFile(aux->regresaPista().getRuta()));
+            player->play();
+        }
+
+    } else {
+
+    }
+}
+
+NodoLista *Lista::iteratorRight()
+{
+    if(head){
+        if(iteradorPlaylist){
+            if(iteradorPlaylist->next){
+                iteradorPlaylist = iteradorPlaylist->next;
+                return iteradorPlaylist;
+            }else {
+                iteradorPlaylist = head;
+                return head;
+            }
+        } else {
+            return nullptr;
+        }
+    } else{
+        return nullptr;
+    }
+}
+
+NodoLista *Lista::iteratorLeft()
+{
+    if(head){
+        NodoLista *aux;
+        aux = head;
+        while(aux->next && aux->next->regresaNombre()!=iteradorPlaylist->regresaNombre()){
+            aux = aux->next;
+        }
+        iteradorPlaylist = aux;
+        return aux;
+    } else {
+        return nullptr;
+    }
+}
+
 NodoLista *Lista::busqueda(QString nombre, NodoLista *Q)
 {
     if (Q)
@@ -89,4 +160,21 @@ NodoLista *Lista::busqueda(QString nombre, NodoLista *Q)
             return busqueda(nombre, Q->next);
     else
         return nullptr;
+}
+
+NodoLista *Lista::returnIterador()
+{
+    if(head){
+        if(iteradorPlaylist->next)
+        {
+            iteradorPlaylist = iteradorPlaylist->next;
+            return iteradorPlaylist->next;
+
+        } else {
+            iteradorPlaylist = head;
+            return iteradorPlaylist;
+        }
+    } else {
+        return nullptr;
+    }
 }
