@@ -8,7 +8,8 @@ class NodoLista
     NodoLista *next;
 public:
     NodoLista();
-    Pista regresaInfo();
+    NodoLista(const Pista&);
+    QString regresaNombre();
     friend class Lista;
 };
 

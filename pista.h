@@ -14,7 +14,7 @@ public:
     Pista(QString, qint64, QString, QString, QString);
     Pista(const Pista&);
     void setObject(QString, qint64, QString, QString, QString);
-    friend class NodoLista;
+    QString getNombre();
 };
 
 #endif // PISTA_H

@@ -2,6 +2,9 @@
 #define REPRODUCTOR_H
 
 #include <QMainWindow>
+#include <QMediaPlayer>
+#include <lista.h>
+#include <QMediaPlaylist>
 
 namespace Ui {
 class Reproductor;
@@ -17,6 +20,12 @@ public:
 
 private:
     Ui::Reproductor *ui;
+    Lista lista;
+    NodoLista *busqueda, *aux;
+    Pista pistaBase;
+    QMediaPlayer player;
+    QMediaPlaylist playlist;
+    QString nombreAux, autorAux, rutaAux, imagenAux;
 };
 
 #endif // REPRODUCTOR_H

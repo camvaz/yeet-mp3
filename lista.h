@@ -12,7 +12,7 @@ public:
     void InsertaFinal(Pista);
     bool eliminaPrimero();
     bool eliminaUltimo();
-    NodoLista *busqueda(QString);
+    NodoLista *busqueda(QString,NodoLista*);
 };
 
 #endif // LISTA_H
