@@ -18,6 +18,14 @@ public:
     explicit Reproductor(QWidget *parent = nullptr);
     ~Reproductor();
 
+private slots:
+    void on_pausaBoton_clicked();
+    void on_positionChanged(qint64);
+    void on_durationChanged(qint64);
+    void on_sliderRola_sliderMoved(int position);
+
+    void on_sliderVolumen_sliderMoved(int position);
+
 private:
     Ui::Reproductor *ui;
     Lista lista;

@@ -18,10 +18,10 @@ Reproductor::Reproductor(QWidget *parent) :
 
     //Agregamos canciones predeterminadas a la playlist
     player = new QMediaPlayer;
-    //connect(player, &QMediaPlayer::positionChanged, this, &);
+    connect(player, &QMediaPlayer::positionChanged, this, &Reproductor::on_positionChanged);
+    connect(player, &QMediaPlayer::durationChanged, this, &Reproductor::on_durationChanged);
     player->setMedia(QUrl::fromLocalFile("/home/vic/Documents/QT/mediaplayer/musica/ElectricRelaxation.mp3"));
-    player->setVolume(50);
-    player->play();
+
 
 
     //Esconder GroupBoxes
@@ -33,4 +33,35 @@ Reproductor::Reproductor(QWidget *parent) :
 Reproductor::~Reproductor()
 {
     delete ui;
+}
+
+void Reproductor::on_pausaBoton_clicked()
+{
+    if( ui->pausaBoton->text() == "▶" ){
+        ui->pausaBoton->setText("⏸");
+        player->play();
+    } else {
+        ui->pausaBoton->setText("▶");
+        player->pause();
+    }
+}
+
+void Reproductor::on_positionChanged(qint64 posicion)
+{
+    ui->sliderRola->setValue(posicion);
+}
+
+void Reproductor::on_durationChanged(qint64 posicion)
+{
+    ui->sliderRola->setMaximum(posicion);
+}
+
+void Reproductor::on_sliderRola_sliderMoved(int position)
+{
+    player->setPosition(position);
+}
+
+void Reproductor::on_sliderVolumen_sliderMoved(int position)
+{
+    player->setVolume(position);
 }
