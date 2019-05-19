@@ -16,6 +16,12 @@ Reproductor::Reproductor(QWidget *parent) :
     //Escondemos el GroupBox de Agregar Pista
     ui->groupBoxAdd->hide();
 
+    //Agregamos canciones predeterminadas a la playlist
+    player = new QMediaPlayer;
+    //connect(player, &QMediaPlayer::positionChanged, this, &);
+    player->setMedia(QUrl::fromLocalFile("/home/vic/Documents/QT/mediaplayer/musica/ElectricRelaxation.mp3"));
+    player->setVolume(50);
+    player->play();
 
 
     //Esconder GroupBoxes

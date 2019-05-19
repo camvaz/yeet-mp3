@@ -23,8 +23,8 @@ private:
     Lista lista;
     NodoLista *busqueda, *aux;
     Pista pistaBase;
-    QMediaPlayer player;
-    QMediaPlaylist playlist;
+    QMediaPlayer *player;
+    QMediaPlaylist *playlist;
     QString nombreAux, autorAux, rutaAux, imagenAux;
 };
 
