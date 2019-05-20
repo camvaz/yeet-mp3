@@ -31,31 +31,25 @@ Reproductor::Reproductor(QWidget *parent) :
     //definimos el tamanio del pixmap para el label
     pixmap = pixmap.scaled(251,251, Qt::KeepAspectRatio);
     ui->labelImagen->setPixmap(pixmap);
+    rutaAux.clear();
 
     //Agregamos canciones predeterminadas a la playlist
 
-    player->setMedia(QUrl::fromLocalFile("/home/vic/Documents/QT/mediaplayer/musica/Dang.mp3"));
     pistaBase.setObject("Dang! (feat. Anderson Paak)", "5:05", "Mac Miller", "/home/vic/Documents/QT/mediaplayer/musica/covers/divinefeminine.png","/home/vic/Documents/QT/mediaplayer/musica/Dang.mp3");
     lista.InsertaFinal(pistaBase);
     ui->listaReproduccion->addItem(pistaBase.getNombre());
 
-
-    player->setMedia(QUrl::fromLocalFile("/home/vic/Documents/QT/mediaplayer/musica/ladders.mp3"));
     pistaBase.setObject("Ladders", "4:47", "Mac Miller", "/home/vic/Documents/QT/mediaplayer/musica/covers/swimming.png","/home/vic/Documents/QT/mediaplayer/musica/ladders.mp3");
     lista.InsertaFinal(pistaBase);
     ui->listaReproduccion->addItem(pistaBase.getNombre());
 
-    player->setMedia(QUrl::fromLocalFile("/home/vic/Documents/QT/mediaplayer/musica/cantgetoveryou.mp3"));
     pistaBase.setObject("CAN'T GET OVER YOU", "2:38", "Joji", "/home/vic/Documents/QT/mediaplayer/musica/covers/joji.png","/home/vic/Documents/QT/mediaplayer/musica/cantgetoveryou.mp3");
     lista.InsertaFinal(pistaBase);
     ui->listaReproduccion->addItem(pistaBase.getNombre());
 
-    player->setMedia(QUrl::fromLocalFile("/home/vic/Documents/QT/mediaplayer/musica/fsmh.mp3"));
     pistaBase.setObject("Father Stretch My Hands Pt. 1", "2:15", "Kanye West", "/home/vic/Documents/QT/mediaplayer/musica/covers/tlop.png","/home/vic/Documents/QT/mediaplayer/musica/fsmh.mp3");
     lista.InsertaFinal(pistaBase);
     ui->listaReproduccion->addItem(pistaBase.getNombre());
-
-
 
     qDebug() << lista.getHead()->regresaNombre();
 
@@ -110,6 +104,7 @@ void Reproductor::on_botonInsInicio_clicked()
     ui->groupBoxSearch->hide();
 
     //Escondemos el GroupBox de Agregar Pista
+    flagInsert = true;
     ui->groupBoxAdd->show();
 }
 
@@ -121,43 +116,108 @@ void Reproductor::on_botonInsFin_clicked()
     ui->groupBoxSearch->hide();
 
     //Escondemos el GroupBox de Agregar Pista
+    flagInsert = false;
     ui->groupBoxAdd->show();
 }
 
 
 void Reproductor::on_botonDelInicio_clicked()
 {
-
+    lista.eliminaPrimero();
+    delete ui->listaReproduccion->takeItem(0);
 }
 
 void Reproductor::on_BotonDelFin_clicked()
 {
-
+    lista.eliminaUltimo();
+    delete ui->listaReproduccion->takeItem(ui->listaReproduccion->count()-1);
 }
 
 void Reproductor::on_botonReproducir_clicked()
 {
-
+    busqueda = lista.getHead();
+    aux = lista.busqueda(ui->busquedaNombre->text(), busqueda);
+    if(aux){
+        lista.setIterator(aux);
+        pistaBase = aux->regresaPista();
+        player->setMedia(QUrl::fromLocalFile(pistaBase.getRuta()));
+        player->play();
+        pixmap.load(pistaBase.getImagen());
+        pixmap = pixmap.scaled(251,251, Qt::KeepAspectRatio);
+        ui->labelImagen->setPixmap(pixmap);
+        ui->labelNombre->setText(pistaBase.getNombre());
+        ui->labelArtista->setText(pistaBase.getAutor()+" - "+pistaBase.getDuracion());
+    } else {
+        QMessageBox::critical(this,"Error de reproduccion.","No se encontro un archivo en la lista para la cancion indicada.");
+    }
 }
 
 void Reproductor::on_botonBuscar_clicked()
 {
-
+    busqueda = lista.getHead();
+    aux = lista.busqueda(ui->busquedaNombre->text(), busqueda);
+    if(aux){
+        QMessageBox::information(ui->centralWidget, "Busqueda Exitosa.", "La pista "+ui->busquedaNombre->text()+" se encuentra en la lista.");
+    } else {
+        QMessageBox::critical(this,"Error de busqueda.","No se encontro un archivo en la lista para la cancion indicada.");
+    }
 }
 
 void Reproductor::on_cargaImagen_clicked()
 {
-
+    imagenAux = QFileDialog::getOpenFileName(this,
+                                             tr("Abrir Archivo..."),
+                                             "/home/vic",
+                                             "All files(*.*);;PNG Files (*.png);;JPG Files(*.jpg)");
 }
 
 void Reproductor::on_cargaArchivo_clicked()
 {
-
+    rutaAux = QFileDialog::getOpenFileName(this,
+                                           tr("Abrir Archivo..."),
+                                           "/home/vic",
+                                           "All files(*.*);;MP3 Files (*.mp3)");
 }
 
 void Reproductor::on_addSong_clicked()
 {
+    QVector<QString> faltantes;
+    QString mensaje = "";
+    if(ui->addNombre->text().size() == 0){
+        faltantes.push_back("Nombre");
+    }
+    if (ui->addArtista->text().size() == 0){
+        faltantes.push_back("Artista");
+    }
+    if (ui->addDuracion->text().size() == 0){
+        faltantes.push_back("Duracion");
+    }
+    if (rutaAux.size() == 0){
+        faltantes.push_back("Archivo");
+    }
+    if (imagenAux.size() == 0){
+        faltantes.push_back("Imagen");
+    }
 
+    if(faltantes.size() > 0){
+        for(QVector<QString>::iterator it = faltantes.begin(); it != faltantes.end(); ++it){
+            mensaje = mensaje + *it +'\n';
+        }
+        QMessageBox::warning(this,
+                             "Error de insercion.",
+                             "Faltan datos para los siguientes campos:\n"+mensaje);
+    } else {
+        pistaBase.setObject(ui->addNombre->text(), ui->addDuracion->text(), ui->addArtista->text(), imagenAux, rutaAux);
+        if(flagInsert){
+            QListWidgetItem *temp = new QListWidgetItem(pistaBase.getNombre());
+            lista.InsertaInicio(pistaBase);
+            ui->listaReproduccion->insertItem(0, temp);
+        }
+        else {
+            lista.InsertaFinal(pistaBase);
+            ui->listaReproduccion->addItem(pistaBase.getNombre());
+        }
+    }
 }
 
 void Reproductor::on_addCancel_clicked()

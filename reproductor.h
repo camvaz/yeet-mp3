@@ -10,6 +10,8 @@
 #include <qmessagebox.h>
 #include <QListWidgetItem>
 #include <qlistwidget.h>
+#include <QFileDialog>
+#include <QVector>
 
 namespace Ui {
 class Reproductor;
@@ -74,6 +76,7 @@ private:
     QFont fuenteBoton;
     QString nombreAux, autorAux, rutaAux, imagenAux;
     qint64 duracion;
+    bool flagInsert;
 };
 
 #endif // REPRODUCTOR_H
