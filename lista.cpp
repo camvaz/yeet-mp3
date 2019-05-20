@@ -22,28 +22,38 @@ void Lista::InsertaInicio(Pista song)
 void Lista::InsertaFinal(Pista song)
 {
     NodoLista *p, *cola;
-    qDebug() <<"yeet1";
     p = new NodoLista(song);
     p->next = nullptr;
-    qDebug() <<"yeet2";
     if (head)
     {
-        qDebug() <<"yeet3";
        cola = head;
-       qDebug() <<"yeet4";
        while (cola->next){
-           qDebug() <<"yeetn1";
            cola = cola->next;
-           qDebug() <<"yeetn2";
         }
-       qDebug() <<"yeet5";
        cola->next = p;
-       qDebug() <<"yeet6";
     }
     else{
-        qDebug() <<"yeet7";
         head = p;
-        qDebug() <<"yeet8";
+    }
+}
+
+void Lista::escribe()
+{
+    QFile archivo("lista.txt");
+
+    if(!archivo.open(QFile::ReadWrite | QFile::Text))
+        return;
+    else{
+        uint32_t i =1;
+        QTextStream toSave(&archivo);
+        NodoLista *aux = head;
+        while(aux){
+            toSave << "============= Pista " << QString::number(i) << " =============\n" << aux->regresaPista().toString();
+            aux = aux->next;
+            ++i;
+        }
+        toSave.flush();
+        archivo.close();
     }
 }
 
@@ -96,7 +106,6 @@ bool Lista::eliminaUltimo()
 void Lista::setIterator(NodoLista *aux)
 {
     iteradorPlaylist = aux;
-    qDebug() << aux->regresaNombre();
 }
 
 void Lista::reproducirOrden(QMediaPlayer *player)

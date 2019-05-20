@@ -53,3 +53,8 @@ QString Pista::getRuta()
 {
     return ruta;
 }
+
+QString Pista::toString()
+{
+    return "Nombre: "+nombre+"\nAutor: "+autor+"\nDuracion: "+duracion+"\nImagen: "+imagen+"\nRuta: "+ruta+"\n\n";
+}

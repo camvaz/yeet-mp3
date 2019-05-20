@@ -19,6 +19,7 @@ public:
     QString getAutor();
     QString getImagen();
     QString getRuta();
+    QString toString();
 };
 
 #endif // PISTA_H

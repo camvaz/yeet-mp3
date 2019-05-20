@@ -13,7 +13,6 @@ Reproductor::Reproductor(QWidget *parent) :
 
     //Definimos el nombre de la aplic  acion
     this->setWindowTitle("Yeet");
-    duracion = 0;
     //Como no va a ser responsivo, esta linea no permite al usuario modificar el tamanio de la ventana
     this->setFixedSize(QSize(1113, 665));
 
@@ -25,12 +24,12 @@ Reproductor::Reproductor(QWidget *parent) :
     player = new QMediaPlayer;
     connect(player, &QMediaPlayer::positionChanged, this, &Reproductor::on_positionChanged);
     connect(player, &QMediaPlayer::durationChanged, this, &Reproductor::on_durationChanged);
-    player->setMedia(QUrl::fromLocalFile("/home/vic/Documents/QT/mediaplayer/musica/fsmh.mp3"));
-    rutaAux = "/home/vic/Documents/QT/mediaplayer/musica/covers/tlop.png";
-    pixmap.load(rutaAux);
+   // player->setMedia(QUrl::fromLocalFile("/home/vic/Documents/QT/mediaplayer/musica/fsmh.mp3"));
+   // rutaAux = "/home/vic/Documents/QT/mediaplayer/musica/covers/tlop.png";
+   // pixmap.load(rutaAux);
     //definimos el tamanio del pixmap para el label
-    pixmap = pixmap.scaled(251,251, Qt::KeepAspectRatio);
-    ui->labelImagen->setPixmap(pixmap);
+   /// pixmap = pixmap.scaled(251,251, Qt::KeepAspectRatio);
+    //ui->labelImagen->setPixmap(pixmap);
     rutaAux.clear();
 
     //Agregamos canciones predeterminadas a la playlist
@@ -148,7 +147,7 @@ void Reproductor::on_botonReproducir_clicked()
         ui->labelNombre->setText(pistaBase.getNombre());
         ui->labelArtista->setText(pistaBase.getAutor()+" - "+pistaBase.getDuracion());
     } else {
-        QMessageBox::critical(this,"Error de reproduccion.","No se encontro un archivo en la lista para la cancion indicada.");
+        QMessageBox::critical(this,"Error de reproduccion.","No se encontro un archivo en la lista para la cancion indicada.", QMessageBox::Ok);
     }
 }
 
@@ -157,9 +156,9 @@ void Reproductor::on_botonBuscar_clicked()
     busqueda = lista.getHead();
     aux = lista.busqueda(ui->busquedaNombre->text(), busqueda);
     if(aux){
-        QMessageBox::information(ui->centralWidget, "Busqueda Exitosa.", "La pista "+ui->busquedaNombre->text()+" se encuentra en la lista.");
+        QMessageBox::information(ui->centralWidget, "Busqueda Exitosa.", "La pista "+ui->busquedaNombre->text()+" se encuentra en la lista.",QMessageBox::Ok);
     } else {
-        QMessageBox::critical(this,"Error de busqueda.","No se encontro un archivo en la lista para la cancion indicada.");
+        QMessageBox::critical(this,"Error de busqueda.","No se encontro un archivo en la lista para la cancion indicada.",QMessageBox::Ok);
     }
 }
 
@@ -205,7 +204,7 @@ void Reproductor::on_addSong_clicked()
         }
         QMessageBox::warning(this,
                              "Error de insercion.",
-                             "Faltan datos para los siguientes campos:\n"+mensaje);
+                             "Faltan datos para los siguientes campos:\n"+mensaje, QMessageBox::Ok);
     } else {
         pistaBase.setObject(ui->addNombre->text(), ui->addDuracion->text(), ui->addArtista->text(), imagenAux, rutaAux);
         if(flagInsert){
@@ -251,7 +250,7 @@ void Reproductor::on_listaReproduccion_itemDoubleClicked(QListWidgetItem *item)
             ui->labelNombre->setText(pistaBase.getNombre());
             ui->labelArtista->setText(pistaBase.getAutor()+" - "+pistaBase.getDuracion());
         } else {
-            QMessageBox::warning(this,"Error de reproduccion.","No se encontro un archivo para la cancion indicada.");
+            QMessageBox::warning(this,"Error de reproduccion.","No se encontro un archivo para la cancion indicada.", QMessageBox::Ok);
         }
 }
 
@@ -271,7 +270,7 @@ void Reproductor::on_listaReproduccion_itemEntered(QListWidgetItem *item)
         ui->labelNombre->setText(pistaBase.getNombre());
         ui->labelArtista->setText(pistaBase.getAutor()+" - "+pistaBase.getDuracion());
     } else {
-        QMessageBox::warning(this,"Error de reproduccion.","No se encontro un archivo para la cancion indicada.");
+        QMessageBox::warning(this,"Error de reproduccion.","No se encontro un archivo para la cancion indicada.", QMessageBox::Ok);
     }
 }
 
@@ -292,7 +291,7 @@ void Reproductor::on_listaReproduccion_itemPressed(QListWidgetItem *item)
         ui->labelNombre->setText(pistaBase.getNombre());
         ui->labelArtista->setText(pistaBase.getAutor()+" - "+pistaBase.getDuracion());
     } else {
-        QMessageBox::warning(this,"Error de reproduccion.","No se encontro un archivo para la cancion indicada.");
+        QMessageBox::warning(this,"Error de reproduccion.","No se encontro un archivo para la cancion indicada.", QMessageBox::Ok);
     }
 }
 
@@ -338,4 +337,12 @@ void Reproductor::on_botonEnorden_clicked()
 void Reproductor::on_botonReproducir_2_clicked()
 {
     this->close();
+}
+
+void Reproductor::on_botonReproducir_3_clicked()
+{
+    uilista = nullptr;
+    lista.escribe();
+    uilista = new ListaDetalles;
+    uilista->show();
 }

@@ -12,6 +12,8 @@
 #include <qlistwidget.h>
 #include <QFileDialog>
 #include <QVector>
+#include <QFile>
+#include <listadetalles.h>
 
 namespace Ui {
 class Reproductor;
@@ -65,6 +67,8 @@ private slots:
 
     void on_botonReproducir_2_clicked();
 
+    void on_botonReproducir_3_clicked();
+
 private:
     Ui::Reproductor *ui;
     Lista lista;
@@ -77,6 +81,7 @@ private:
     QString nombreAux, autorAux, rutaAux, imagenAux;
     qint64 duracion;
     bool flagInsert;
+    ListaDetalles *uilista;
 };
 
 #endif // REPRODUCTOR_H

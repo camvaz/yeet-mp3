@@ -3,7 +3,7 @@
 #include <nodolista.h>
 #include <qdebug.h>
 #include <qmediaplayer.h>
-
+#include <qfile.h>
 class Lista
 {
     NodoLista *head;
@@ -13,6 +13,7 @@ public:
     NodoLista *getHead();
     void InsertaInicio(Pista);
     void InsertaFinal(Pista);
+    void escribe();
     bool eliminaPrimero();
     bool eliminaUltimo();
     void setIterator(NodoLista*);
